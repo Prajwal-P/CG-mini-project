@@ -85,15 +85,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Glew and Glut\glew-1.11.0\include;C:\Glew and Glut\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External lib\glew-1.11.0\include;$(SolutionDir)External lib\freeglut\include;$(SolutionDir)External lib\SOIL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Glew and Glut\glew-1.11.0\lib;C:\Glew and Glut\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)External lib\SOIL2\lib;$(SolutionDir)External lib\glew-1.11.0\lib;$(SolutionDir)External lib\freeglut\lib;$(SolutionDir)\External lib\SOIL2\lib;C:\Glew and Glut\glew-1.11.0\lib;C:\Glew and Glut\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;soil2-debug.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,17 +117,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Glew and Glut\glew-1.11.0\include;C:\Glew and Glut\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External lib\glew-1.11.0\include;$(SolutionDir)External lib\freeglut\include;$(SolutionDir)External lib\SOIL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Glew and Glut\glew-1.11.0\lib;C:\Glew and Glut\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)External lib\SOIL2\lib;$(SolutionDir)External lib\glew-1.11.0\lib;$(SolutionDir)External lib\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;soil2.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,6 +148,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\loading.png" />
+    <Image Include="res\loading1.gif" />
+    <Image Include="res\p.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="External lib\SOIL2\include\image_DXT.h" />
+    <ClInclude Include="External lib\SOIL2\include\image_helper.h" />
+    <ClInclude Include="External lib\SOIL2\include\jo_jpeg.h" />
+    <ClInclude Include="External lib\SOIL2\include\pkm_helper.h" />
+    <ClInclude Include="External lib\SOIL2\include\pvr_helper.h" />
+    <ClInclude Include="External lib\SOIL2\include\SOIL2.h" />
+    <ClInclude Include="External lib\SOIL2\include\stbi_DDS.h" />
+    <ClInclude Include="External lib\SOIL2\include\stbi_DDS_c.h" />
+    <ClInclude Include="External lib\SOIL2\include\stbi_ext.h" />
+    <ClInclude Include="External lib\SOIL2\include\stbi_ext_c.h" />
+    <ClInclude Include="External lib\SOIL2\include\stbi_pkm.h" />
+    <ClInclude Include="External lib\SOIL2\include\stbi_pkm_c.h" />
+    <ClInclude Include="External lib\SOIL2\include\stbi_pvr.h" />
+    <ClInclude Include="External lib\SOIL2\include\stbi_pvr_c.h" />
+    <ClInclude Include="External lib\SOIL2\include\stb_image.h" />
+    <ClInclude Include="External lib\SOIL2\include\stb_image_write.h" />
+    <ClInclude Include="External lib\SOIL2\include\wfETC.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
