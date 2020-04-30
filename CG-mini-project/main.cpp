@@ -118,7 +118,7 @@ public:
 			{
 				tex_2d_plane = SOIL_load_OGL_texture
 				(
-					"res/plane1.png",
+					"res/plane2.png",
 					SOIL_LOAD_AUTO,
 					SOIL_CREATE_NEW_ID,
 					SOIL_FLAG_MULTIPLY_ALPHA
@@ -132,7 +132,7 @@ public:
 			{
 				tex_2d_plane = SOIL_load_OGL_texture
 				(
-					"res/plane2.png",
+					"res/plane3.png",
 					SOIL_LOAD_AUTO,
 					SOIL_CREATE_NEW_ID,
 					SOIL_FLAG_MULTIPLY_ALPHA
@@ -165,7 +165,7 @@ void keyboard(unsigned char key, int x, int y)
 		//27 is the ASCII value of the ESC key
 	case 27:
 		x = 0.0;
-		if (page != 2)
+		if (page != 2 && page != 1)
 		{
 			i_bck = 0, i_mis1 = 0, i_mis2 = 0, i_mis3 = 0, i_plane = 0, i_sel31 = 0, i_sel32 = 0, i_fin4 = 0;
 			i_23 = 0, i_0 = 0, i_1 = 0;
@@ -178,8 +178,8 @@ void keyboard(unsigned char key, int x, int y)
 			fuel = 98;
 			y_cre = 0;
 			x = 0.0;
-			cout << full << endl;
-			cout << x << endl;
+			cout << "full =" << full << endl;
+			cout << "x = " << x << endl;
 			page = 2;
 		}
 		else
@@ -209,15 +209,16 @@ void SpecialKeys(int key, int x, int y)
 	{
 		switch (key)
 		{
+		case GLUT_KEY_UP:
 		case GLUT_KEY_RIGHT:
-			if (ch_scene < 5)
+			if (ch_scene < 9)
 			{
 				ch_scene++;
 				i_s = 0;
 				cout << ch_scene << endl;
 			}
 			break;
-
+		case GLUT_KEY_DOWN:
 		case GLUT_KEY_LEFT:
 			if (ch_scene > 1)
 			{
@@ -252,9 +253,10 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 {
 	if (page == 1)
 	{
-		if (m_x > 620 && m_y > 260 && m_state == GLUT_UP)
+		if (m_state == GLUT_UP)
 		{
 			cout << m_x << " " << m_y << endl;
+			if(m_x > 620 && m_y > 260)
 			page = 2;
 		}
 	}
@@ -263,6 +265,7 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 		if (full == 0)
 		{
 			if (m_state == GLUT_UP)
+				cout << "full = " << full << endl;
 				cout << m_x << " " << m_y << endl;
 			if (m_y > 92 && m_y < 116 && m_state == GLUT_UP)
 			{
@@ -299,7 +302,8 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 		}
 		else
 		{
-			if (state == GLUT_UP)
+			if (m_state == GLUT_UP)
+				cout << "full = " << full << endl;
 				cout << m_x << " " << m_y << endl;
 			if (m_y > 154 && m_y < 195 && m_state == GLUT_UP)
 			{
@@ -968,13 +972,25 @@ void select_scene()
 		sprintf(scene, "res/scene2.png");
 		break;
 	case 3:
-		sprintf(scene, "res/scene3.png");
+		sprintf(scene, "res/scene3.jpg");
 		break;
 	case 4:
 		sprintf(scene, "res/scene4.jpg");
 		break;
 	case 5:
 		sprintf(scene, "res/scene5.jpg");
+		break;
+	case 6:
+		sprintf(scene, "res/scene6.jpg");
+		break;
+	case 7:
+		sprintf(scene, "res/scene7.png");
+		break;
+	case 8:
+		sprintf(scene, "res/scene8.jpg");
+		break;
+	case 9:
+		sprintf(scene, "res/scene9.jpg");
 		break;
 	}
 }
