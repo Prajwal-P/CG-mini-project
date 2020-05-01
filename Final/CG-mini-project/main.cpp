@@ -49,6 +49,7 @@ int setting = 0;
 void* currentfont;
 
 float x_step = -171.0;    //for loading bar movement (in pg=0)
+
 float y_cre = 0;            //for credits text moveemnt
 float y_pos = 0;          //y axis position of plane
 float theta = 0;          //angle of the plane
@@ -66,7 +67,7 @@ int no_of_missiles = 3;   //determines number of missiles in the game
 int full = 1;
 int i_bck, i_mis1, i_mis2, i_mis3, i_plane, i_inst21;
 int i_cre22, i_sel31, i_sel32, i_fin4, i_2, i_23, i_0, i_1;
-int i_s, i;
+int i_s;
 
 GLfloat windowWidth;
 GLfloat windowHeight;
@@ -99,9 +100,9 @@ Page no         name
 class plane
 {
 public:
-	float x[MAX], y[MAX], i;
-	float ymax, ymin;
-	int button;
+	float x[MAX], y[MAX];
+	// float ymax, ymin;
+	// int button;
 	plane()
 	{
 		x[1] = -30, x[2] = 30, x[3] = 30, x[4] = -30;
@@ -879,7 +880,7 @@ void draw_chPlane_text()
 //print the score in page 3 (prints the game scores during game play)
 void draw_score()
 {
-	int length;
+	int length, i;
 	char score_text[15];
 	strcpy(score_text, "Distance: ");
 	glLineWidth(1);
@@ -1187,7 +1188,7 @@ void drawLogo()
 
 void drawfps()
 {
-	int length;
+	int length, i;
 	char d_fps[15];
 	sprintf(d_fps, "FPS: %.1f", fps);
 	glLineWidth(1);

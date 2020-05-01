@@ -4,7 +4,7 @@
 
 int full = 0;   //defines state of screen (fullscreen or not)
 int frames = 50;
-float x_step = -171.0, y_step = -171.0;    //for loading bar movement
+float x_step = -171.0;    //for loading bar movement
 /*The value of these variables defines the amount of pixels along the standard Cartesian coordinate system
 loading bar moves. For example, setting xstep to -2.0f would mean that the bar would move two pixels
 in a certain amount of time defined by the frames variable. The frames variable dictates the amount of milliseconds inbetween each movement of the square.
@@ -20,7 +20,7 @@ void keyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'r':       //reset values
-		x_step = -171.0, y_step = -171.0;;
+		x_step = -171.0;
 		break;
 
 		//27 is the ASCII value of the ESC key
@@ -93,7 +93,10 @@ void RenderScene()
 void TimerFunction(int value)
 {
 	if (x_step < 171.0)
+	{
 		x_step += 6.0;
+		std::cout << "x_step = " << x_step << "\n";
+	}	
 	//Redraws the scene with all changes above
 	glutPostRedisplay();
 	glutTimerFunc(frames, TimerFunction, 1);
@@ -153,7 +156,7 @@ int main(int argc, char* argv[])
 	glutPositionWindow(320, 150);
 	glutKeyboardFunc(keyboard);
 	glutDisplayFunc(RenderScene);
-	glutTimerFunc(33, TimerFunction, 1);
+	glutTimerFunc(frames, TimerFunction, 1);
 	glutReshapeFunc(reshape);
 	SetupRC();
 	glutMainLoop();
