@@ -5,7 +5,7 @@
 using namespace std;
 
 void* currentfont;
-int full = 0;   //defines state of screen (fullscreen or not)
+int full = 1;   //defines state of screen (fullscreen or not)
 int frames = 50;
 
 GLfloat windowWidth;
@@ -87,35 +87,35 @@ void RenderScene()
 	glColor3f(0.0, 0.0, 0.0);
 	if (!full)
 	{
-		drawString(-129.0, 65.0, 0.0, "Bangalore Institute of Technology");
+		drawString(-142.0, 63.0, 0.0, "Bangalore Institute of Technology");
 		setFont(GLUT_BITMAP_HELVETICA_18);
 		glColor3f(0.0, 0.0, 0.0);
-		drawString(-90.0, 55.0, 0.0, "Made By:");
+		drawString(-87.0, 53.0, 0.0, "Made By:");
 		setFont(GLUT_BITMAP_HELVETICA_18);
 		glColor3f(0.0, 0.0, 0.0);
-		drawString(-110.0, 45.0, 0.0, "Revanth P N - 1BI17CS123");
+		drawString(-119.0, 43.0, 0.0, "Revanth P N - 1BI17CS123");
 		setFont(GLUT_BITMAP_HELVETICA_18);
 		glColor3f(0.0, 0.0, 0.0);
-		drawString(-105.0, 35.0, 0.0, "Prajwal P - 1BI17CS111");
+		drawString(-111.0, 33.0, 0.0, "Prajwal P - 1BI17CS111");
 		setFont(GLUT_BITMAP_HELVETICA_18);
 		glColor3f(0.0, 0.0, 0.0);
 		drawString(130.0, -50.0, 0.0, "Next!");
 	}
 	else
 	{
-		drawString(-105.0, 65.0, 0.0, "Bangalore Institute of Technology");
+		drawString(-110.0, 65.0, 0.0, "Bangalore Institute of Technology");
 		setFont(GLUT_BITMAP_HELVETICA_18);
 		glColor3f(0.0, 0.0, 0.0);
 		drawString(-80.0, 55.0, 0.0, "Made By:");
 		setFont(GLUT_BITMAP_HELVETICA_18);
 		glColor3f(0.0, 0.0, 0.0);
-		drawString(-95.0, 45.0, 0.0, "Revanth P N - 1BI17CS123");
+		drawString(-97.0, 45.0, 0.0, "Revanth P N - 1BI17CS123");
 		setFont(GLUT_BITMAP_HELVETICA_18);
 		glColor3f(0.0, 0.0, 0.0);
-		drawString(-92.0, 35.0, 0.0, "Prajwal P - 1BI17CS111");
+		drawString(-93.0, 35.0, 0.0, "Prajwal P - 1BI17CS111");
 		setFont(GLUT_BITMAP_TIMES_ROMAN_24);
 		glColor3f(0.0, 0.0, 0.0);
-		drawString(125.0, -50.0, 0.0, "Click Here!");
+		drawString(126.0, -50.0, 0.0, "Click Here!");
 		setFont(GLUT_BITMAP_HELVETICA_18);
 		glColor3f(0.0, 0.0, 0.0);
 		drawString(135.0, -55.0, 0.0, "Next!");
@@ -206,6 +206,10 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(800, 450);
 	glutCreateWindow("Splash!");
 	glutPositionWindow(320, 150);
+	if (full == 1)
+	{
+		glutFullScreen();
+	}
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
 	glutDisplayFunc(RenderScene);
