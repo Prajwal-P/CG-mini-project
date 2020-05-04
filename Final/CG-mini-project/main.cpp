@@ -1840,7 +1840,10 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(800, 450);
 	glutCreateWindow("Airplane!");
 	//glutPositionWindow(320,150);
-	glutFullScreen();
+	if (full == 1)
+	{
+		glutFullScreen();
+	}
 	myinit();
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(SpecialKeys);
