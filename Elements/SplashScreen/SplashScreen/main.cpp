@@ -5,7 +5,7 @@
 using namespace std;
 
 void* currentfont;
-int full = 1;   //defines state of screen (fullscreen or not)
+int full = 0;   //defines state of screen (fullscreen or not)
 int frames = 50;
 
 GLfloat windowWidth;
