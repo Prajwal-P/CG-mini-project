@@ -831,8 +831,8 @@ void draw_chPlane_text()
 
 
 	strcpy(string[0], "Choose Plane");
-	strcpy(string[1], "Paper Plane!");
-	strcpy(string[2], "Military X991+");
+	strcpy(string[1], "Military X991+");
+	strcpy(string[2], "Toy Plane!");
 	strcpy(string[3], "Next");
 
 	glLineWidth(2);
