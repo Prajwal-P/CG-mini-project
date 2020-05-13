@@ -154,6 +154,10 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(800, 450);
 	glutCreateWindow("Loading...");
 	glutPositionWindow(320, 150);
+	if (full == 1)
+	{
+		glutFullScreen();
+	}
 	glutKeyboardFunc(keyboard);
 	glutDisplayFunc(RenderScene);
 	glutTimerFunc(frames, TimerFunction, 1);
