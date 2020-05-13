@@ -14,51 +14,10 @@ int i = 0;
 GLuint tex_2d_plane;
 GLuint tex_2d;
 
-void* currentfont;
-
 GLfloat windowWidth;
 GLfloat windowHeight;
 
 int plane_choice=2;
-
-void setFont(void* font)
-{
-	currentfont=font;
-}
-void drawString(float x, float y, float z, const char* string)
-{
-	int i;
-	glRasterPos3f(x, y, z);
-	for (i = 0; string[i] != '\0'; i++)
-	{
-		glutBitmapCharacter(currentfont, string[i]);
-	}
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-	switch (key)
-	{
-		//27 is the ASCII value of the ESC key
-	case 27:        //exit game
-		exit(0);
-		break;
-
-	case 'f':       //full screen
-		if (full == 0)
-		{
-			glutFullScreen();
-			full = 1;
-		}
-		else
-		{
-			glutReshapeWindow(800, 450);
-			glutPositionWindow(320, 150);
-			full = 0;
-		}
-	}
-}
-
 
 class plane
 {
@@ -119,6 +78,30 @@ public:
 		glDisable(GL_BLEND);
 	}
 } plane1;
+
+void keyboard(unsigned char key, int x, int y)
+{
+	switch (key)
+	{
+		//27 is the ASCII value of the ESC key
+	case 27:        //exit game
+		exit(0);
+		break;
+
+	case 'f':       //full screen
+		if (full == 0)
+		{
+			glutFullScreen();
+			full = 1;
+		}
+		else
+		{
+			glutReshapeWindow(800, 450);
+			glutPositionWindow(320, 150);
+			full = 0;
+		}
+	}
+}
 
 void mouse(int button, int m_state, int x, int y)
 {
@@ -220,7 +203,6 @@ void draw_chPlane_text()
 		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[3][i]);
 	}
 	glPopMatrix();
-
 }
 
 void draw_chosen_plane()
@@ -280,17 +262,6 @@ void RenderScene()
 	glutSwapBuffers();
 }
 
-
-
-void SetupRC(void)
-{
-//Sets the clear color. Again, the values are in RGBA float format
-	glClearColor(0.0f, 0.8f, 0.0f, 1.0f);
-
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glEnable(GL_TEXTURE_2D);
-}
-
 void reShape(int w, int h)
 {
 	GLfloat aspectRatio;
@@ -342,7 +313,6 @@ int main(int argc, char* argv[])
 	glutMouseFunc(mouse);
 	glutDisplayFunc(RenderScene);
 	glutReshapeFunc(reShape);
-	SetupRC();
 	glutMainLoop();
 
 	return 0;
