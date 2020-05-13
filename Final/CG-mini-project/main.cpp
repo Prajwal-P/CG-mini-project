@@ -417,7 +417,7 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 		{
 			if (full == 0)
 			{
-				if (m_y > 300)
+				if (m_x > 338 && m_x < 410 && m_y > 365 && m_y < 401)
 				{
 					cout << "next" << endl;
 					i_plane = 0;
@@ -432,7 +432,7 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 			}
 			else
 			{
-				if (m_y > 470)
+				if (m_x > 821 && m_x < 969 && m_y > 879 && m_y < 955)
 				{
 					cout << "next" << endl;
 					i_plane = 0;
