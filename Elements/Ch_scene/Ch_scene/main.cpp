@@ -117,7 +117,6 @@ void draw_chScene_text()
 		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[2][i]);
 	}
 	glPopMatrix();
-
 }
 
 void mouse(int button, int m_state, int x, int y)
@@ -233,7 +232,7 @@ void SetupRC(void)
 	glEnable(GL_TEXTURE_2D);
 }
 
-void ChangeSize(int w, int h)
+void reShape(int w, int h)
 {
 	GLfloat aspectRatio;
 
@@ -282,7 +281,7 @@ int main(int argc, char* argv[])
 	glutMouseFunc(mouse);
 	glutKeyboardFunc(keyboard);
 	glutDisplayFunc(RenderScene);
-	glutReshapeFunc(ChangeSize);
+	glutReshapeFunc(reShape);
 	SetupRC();
 	glutMainLoop();
 
