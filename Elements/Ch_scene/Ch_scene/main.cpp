@@ -3,52 +3,26 @@
 #include <iostream>
 #include<string.h>
 #include<stdio.h>
+
 #define MAX 10
-char scene[50];
-int ch_scene = 1;
-int page;
+
 using namespace std;
+
+char scene[50];
+
+int ch_scene = 1;
+
 int i_plane;
-GLuint tex_2d_plane;
-void* currentfont;
-void setFont(void* font)
-{
-	currentfont = font;
-}
-void drawstring(float x, float y, float z, char* string)
-{
-	char* c;
-	glRasterPos3f(x, y, z);
-
-	for (c = string; *c != '\0'; c++)
-	{
-		glColor3f(0.0, 0.0, 0.0);
-		glutBitmapCharacter(currentfont, *c);
-	}
-}
-
-//Sets jimmy's initial position and size.
-//rsize equals half of jimmy's height and width
-GLfloat x = 0.0f;
-GLfloat y = 0.0f;
-GLfloat rsize = 8;
-int frames = 5, full = 0;
 int i = 0;
-//Sets the direction and velocity of jimmy at the program initialization
-/*The value of these variables defines the amount of pixels along the standard Cartesian coordinate system
-Jimmy moves. For example, setting xstep to -2.0f would mean that jimmy would move two pixels
-in a certain amount of time defined by the frames variable. The frames variable dictates the amount of milliseconds inbetween each movement of the square.
-That means that if frames = 2, I get 50 fps, and therefore 50 movements of jimmy in a second.*/
-GLfloat xstep = 0.0f;   //defines mivement. Stopped if 0
-GLfloat ystep = 0.0f;
+
+int full = 0;
 
 GLfloat windowWidth;
 GLfloat windowHeight;
 
 GLuint tex_2d;
 
-
-void keycrap(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
@@ -78,7 +52,7 @@ void SpecialKeys(int key, int x, int y) //to specify direction of jimmy
 	{
 	case GLUT_KEY_UP:
 	case GLUT_KEY_RIGHT:
-		if (ch_scene < 5)
+		if (ch_scene < 9)
 		{
 			ch_scene++;
 			i = 0;
@@ -104,7 +78,6 @@ void draw_chScene_text()
 	char string[15][120];
 	int i, lengthOfString;
 
-
 	strcpy(string[0], "Choose Scene");
 	strcpy(string[1], "Use arrow keys");
 	strcpy(string[2], "Next");
@@ -112,7 +85,7 @@ void draw_chScene_text()
 	glLineWidth(2);
 	glPushMatrix();
 	glTranslatef(-130, 55, 0);
-	glScalef(0.3, 0.3, 0.3);
+	glScalef((GLfloat)0.3, (GLfloat)0.3, (GLfloat)0.3);
 	lengthOfString = (int)strlen(string[0]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -124,7 +97,7 @@ void draw_chScene_text()
 	glLineWidth(3);
 	glPushMatrix();
 	glTranslatef(-75, 35, 0);
-	glScalef(0.15, 0.15, 0.15);
+	glScalef((GLfloat)0.15, (GLfloat)0.15, (GLfloat)0.15);
 	lengthOfString = (int)strlen(string[1]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -136,7 +109,7 @@ void draw_chScene_text()
 	glLineWidth(2);
 	glPushMatrix();
 	glTranslatef(-25, -75, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string[2]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -144,21 +117,20 @@ void draw_chScene_text()
 		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[2][i]);
 	}
 	glPopMatrix();
-
 }
 
 void mouse(int button, int m_state, int x, int y)
 {
+	cout << x << " " << y << endl;
 	if (button == GLUT_LEFT_BUTTON && m_state == GLUT_UP)
 	{
-		cout << x << " " << y << endl;
 		if (full == 0)
 		{
 			if (x > 338 && x < 410 && y > 365 && y < 401)
 			{
 				cout << "next" << endl;
 				i_plane = 0;
-				page = 3;
+				//Next page based on setting
 			}
 		}
 		else
@@ -167,7 +139,7 @@ void mouse(int button, int m_state, int x, int y)
 			{
 				cout << "next" << endl;
 				i_plane = 0;
-				page = 3;
+				//Next page based on setting
 			}
 		}
 	}
@@ -185,13 +157,25 @@ void select_scene()
 		sprintf(scene, "res/scene2.png");
 		break;
 	case 3:
-		sprintf(scene, "res/scene3.png");
+		sprintf(scene, "res/scene3.jpg");
 		break;
 	case 4:
 		sprintf(scene, "res/scene4.jpg");
 		break;
 	case 5:
 		sprintf(scene, "res/scene5.jpg");
+		break;
+	case 6:
+		sprintf(scene, "res/scene6.jpg");
+		break;
+	case 7:
+		sprintf(scene, "res/scene7.png");
+		break;
+	case 8:
+		sprintf(scene, "res/scene8.jpg");
+		break;
+	case 9:
+		sprintf(scene, "res/scene9.jpg");
 		break;
 	}
 }
@@ -202,11 +186,8 @@ void RenderScene()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glEnable(GL_TEXTURE_2D);
-
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-
 	select_scene();
-
 	if (i == 0)
 	{
 		tex_2d = SOIL_load_OGL_texture
@@ -251,7 +232,7 @@ void SetupRC(void)
 	glEnable(GL_TEXTURE_2D);
 }
 
-void ChangeSize(int w, int h)
+void reShape(int w, int h)
 {
 	GLfloat aspectRatio;
 
@@ -292,12 +273,15 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(800, 450);
 	glutCreateWindow("Choose Scene");
 	glutPositionWindow(320, 150);
-	glutIgnoreKeyRepeat(1);
+	if (full == 1)
+	{
+		glutFullScreen();
+	}
 	glutSpecialFunc(SpecialKeys);
 	glutMouseFunc(mouse);
-	glutKeyboardFunc(keycrap);
+	glutKeyboardFunc(keyboard);
 	glutDisplayFunc(RenderScene);
-	glutReshapeFunc(ChangeSize);
+	glutReshapeFunc(reShape);
 	SetupRC();
 	glutMainLoop();
 
