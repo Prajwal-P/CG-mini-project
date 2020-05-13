@@ -5,9 +5,7 @@
 
 using namespace std;
 
-void* currentfont;
 int full = 0;   //defines state of screen (fullscreen or not)
-int frames = 50;
 
 GLfloat windowWidth;
 GLfloat windowHeight;
@@ -34,6 +32,65 @@ void keyboard(unsigned char key, int x, int y)
 			glutReshapeWindow(800, 450);
 			glutPositionWindow(320, 150);
 			full = 0;
+		}
+	}
+}
+
+void mouse(int button, int state, int x, int y)
+{
+	//set the coordinates and update page
+	if (full == 0)
+	{
+		if (state == GLUT_UP)
+		{
+			cout << x << " " << y << endl;
+			if (x > 130 && x < 189 && y > 86 && y < 114)
+			{
+				cout << "play" << endl;
+			}
+			if (x > 130 && x < 235 && y > 120 && y < 150)
+			{
+				cout << "Settings" << endl;
+			}
+			if (x > 130 && x < 279 && y > 154 && y < 182)
+			{
+				cout << "Instructions" << endl;
+			}
+			if (x > 130 && x < 209 && y > 187 && y < 217)
+			{
+				cout << "Credit" << endl;
+			}
+			if (x > 130 && x < 189 && y > 221 && y < 250)
+			{
+				cout << "Exit" << endl;
+			}
+		}
+	}
+	else if (full == 1)
+	{
+		if (state == GLUT_UP)
+		{
+			cout << x << " " << y << endl;
+			if (x > 314 && x < 453 && y > 206 && y < 273)
+			{
+				cout << "play" << endl;
+			}
+			if (x > 314 && x < 562 && y > 291 && y < 356)
+			{
+				cout << "Settings" << endl;
+			}
+			if (x > 314 && x < 667 && y > 373 && y < 436)
+			{
+				cout << "Instructions" << endl;
+			}
+			if (x > 314 && x < 502 && y > 452 && y < 516)
+			{
+				cout << "Credit" << endl;
+			}
+			if (x > 314 && x < 451 && y > 535 && y < 596)
+			{
+				cout << "Exit" << endl;
+			}
 		}
 	}
 }
@@ -139,7 +196,6 @@ void RenderScene()
 	draw_menu_text();
 
 	glutSwapBuffers();
-
 }
 
 void SetupRC(void)
@@ -185,66 +241,6 @@ void reshape(int w, int h)
 	glLoadIdentity();
 }
 
-void mouse(int button, int state, int x, int y)
-{
-	//set the coordinates and update page
-	if (full == 0)
-	{
-		if (state == GLUT_UP)
-		{
-			cout << x << " " << y << endl;
-			if (x > 130 && x < 189 && y > 86 && y < 114)
-			{
-				cout << "play" << endl;
-			}
-			if (x > 130 && x < 235 && y > 120 && y < 150)
-			{
-				cout << "Settings" << endl;
-			}
-			if (x > 130 && x < 279 && y > 154 && y < 182)
-			{
-				cout << "Instructions" << endl;
-			}
-			if (x > 130 && x < 209 && y > 187 && y < 217)
-			{
-				cout << "Credit" << endl;
-			}
-			if (x > 130 && x < 189 && y > 221 && y < 250)
-			{
-				cout << "Exit" << endl;
-			}
-		}
-	}
-	else if (full == 1)
-	{
-		if (state == GLUT_UP)
-		{
-			cout << x << " " << y << endl;
-			if (x > 314 && x < 453 && y > 206 && y < 273)
-			{
-				cout << "play" << endl;
-			}
-			if (x > 314 && x < 562 && y > 291 && y < 356)
-			{
-				cout << "Settings" << endl;
-			}
-			if (x > 314 && x < 667 && y > 373 && y < 436)
-			{
-				cout << "Instructions" << endl;
-			}
-			if (x > 314 && x < 502 && y > 452 && y < 516)
-			{
-				cout << "Credit" << endl;
-			}
-			if (x > 314 && x < 451 && y > 535 && y < 596)
-			{
-				cout << "Exit" << endl;
-			}
-		}
-	}
-}
-
-
 //Actually opens the window, initializes all the functions I made, and throws it all into a loop. Hooray!
 int main(int argc, char* argv[])
 {
@@ -253,6 +249,10 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(800, 450);
 	glutCreateWindow("Menu");
 	glutPositionWindow(320, 150);
+	if (full == 1)
+	{
+		glutFullScreen();
+	}
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
 	glutDisplayFunc(RenderScene);
