@@ -87,7 +87,6 @@ void keyboard(unsigned char key, int x, int y)
 	case 27:        //exit game
 		exit(0);
 		break;
-
 	case 'f':       //full screen
 		if (full == 0)
 		{
@@ -100,6 +99,12 @@ void keyboard(unsigned char key, int x, int y)
 			glutPositionWindow(320, 150);
 			full = 0;
 		}
+		break;
+	case 13:
+		cout << "next" << endl;
+		i_plane = 0;
+		// next page
+		break;
 	}
 }
 
