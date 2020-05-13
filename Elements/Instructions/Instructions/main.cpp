@@ -1,26 +1,12 @@
 #include <GL/glut.h>
 #include "SOIL2.h"
-//#include <iostream>
 #include<string.h>
 
-void* currentfont;
-int frames = 50, full = 0;
+int full = 0;
 GLfloat windowWidth;
 GLfloat windowHeight;
 
 GLuint tex_2d;
-
-void drawstring(float x, float y, float z, char* string)
-{
-	char* c;
-	glRasterPos3f(x, y, z);
-
-	for (c = string; *c != '\0'; c++)
-	{
-		glColor3f(0.0, 0.0, 0.0);
-		glutBitmapCharacter(currentfont, *c);
-	}
-}
 
 void keyboard(unsigned char key, int x, int y)
 {
