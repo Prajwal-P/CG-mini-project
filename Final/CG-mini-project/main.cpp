@@ -1326,19 +1326,19 @@ void RenderScene()
 		}
 		else
 		{
-			drawString(-110.0, 65.0, 0.0, "Bangalore Institute of Technology");
+			drawString(-100.0, 65.0, 0.0, "Bangalore Institute of Technology");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(-80.0, 55.0, 0.0, "Made By:");
+			drawString(-75.0, 55.0, 0.0, "Made By:");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(-97.0, 45.0, 0.0, "Revanth P N - 1BI17CS123");
+			drawString(-90.0, 45.0, 0.0, "Revanth P N - 1BI17CS123");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(-93.0, 35.0, 0.0, "Prajwal P - 1BI17CS111");
+			drawString(-87.0, 35.0, 0.0, "Prajwal P - 1BI17CS111");
 			setFont(GLUT_BITMAP_TIMES_ROMAN_24);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(126.0, -50.0, 0.0, "Click Here!");
+			drawString(128.0, -50.0, 0.0, "Click Here!");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
 			drawString(135.0, -55.0, 0.0, "Next!");
