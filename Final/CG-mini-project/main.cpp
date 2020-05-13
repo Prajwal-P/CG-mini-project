@@ -366,22 +366,22 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 	{
 		if (button == GLUT_LEFT_BUTTON && m_state == GLUT_UP)
 		{
+			cout << m_x << " " << m_y << endl;
 			if (full == 0)
 			{
-				cout << m_x << " " << m_y << endl;
-				if (m_y > 168 && m_y < 205)
+				if (m_x > 505 && m_x < 715 && m_y>170 && m_y < 205)
 				{
 					plane_choice = 1;
 					i_plane = 0;
 					glutPostRedisplay();
 				}
-				if (m_y > 242 && m_y < 287)
+				if (m_x > 505 && m_x < 715 && m_y>240 && m_y < 280)
 				{
 					plane_choice = 2;
 					i_plane = 0;
 					glutPostRedisplay();
 				}
-				if (m_y > 300)
+				if (m_x > 325 && m_x < 425 && m_y>350 && m_y < 400)
 				{
 					cout << "next" << endl;
 					i_plane = 0;
@@ -390,19 +390,19 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 			}
 			else
 			{
-				if (m_y > 307 && m_y < 347)
+				if (m_x > 1225 && m_x < 1710 && m_y>425 && m_y < 490)
 				{
 					plane_choice = 1;
 					i_plane = 0;
 					glutPostRedisplay();
 				}
-				if (m_y > 416 && m_y < 463)
+				if (m_x > 1230 && m_x < 1580 && m_y>590 && m_y < 650)
 				{
 					plane_choice = 2;
 					i_plane = 0;
 					glutPostRedisplay();
 				}
-				if (m_y > 470)
+				if (m_x > 790 && m_x < 1010 && m_y>850 && m_y < 945)
 				{
 					cout << "next" << endl;
 					i_plane = 0;
@@ -858,7 +858,7 @@ void draw_chPlane_text()
 	glLineWidth(2);
 	glPushMatrix();
 	glTranslatef(-120, 55, 0);
-	glScalef(0.3, 0.3, 0.3);
+	glScalef((GLfloat)0.3, (GLfloat)0.3, (GLfloat)0.3);
 	lengthOfString = (int)strlen(string[0]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -868,12 +868,12 @@ void draw_chPlane_text()
 	glPopMatrix();
 
 	glLineWidth(1);
-	int y_pos_21 = 40;
+	GLfloat y_pos_21 = 40;
 	for (int k_t = 1; k_t <= 2; k_t++)
 	{
 		glPushMatrix();
 		glTranslatef(50, y_pos_21 -= 30, 0);
-		glScalef(0.1, 0.1, 0.1);
+		glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 		lengthOfString = (int)strlen(string[k_t]);
 		for (i = 0; i < lengthOfString; i++)
 		{
@@ -886,7 +886,7 @@ void draw_chPlane_text()
 	glLineWidth(2);
 	glPushMatrix();
 	glTranslatef(-30, -75, 0);
-	glScalef(0.15, 0.15, 0.15);
+	glScalef((GLfloat)0.15, (GLfloat)0.15, (GLfloat)0.15);
 	lengthOfString = (int)strlen(string[3]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -1170,7 +1170,7 @@ void draw_chosen_plane()
 
 	glPushMatrix();
 	glTranslatef(-90, 0, 0);
-	glScalef(1.6, 1.6, 0);
+	glScalef((GLfloat)1.6, (GLfloat)1.6, (GLfloat)0);
 	plane1.draw_plane();
 	glPopMatrix();
 }
@@ -1503,11 +1503,8 @@ void RenderScene()
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
-
 		glEnable(GL_TEXTURE_2D);
-
 		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-
 		if (i_sel31 == 0)
 		{
 			tex_2d_31 = SOIL_load_OGL_texture
@@ -1521,7 +1518,6 @@ void RenderScene()
 		}
 
 		glBindTexture(GL_TEXTURE_2D, tex_2d_31);
-
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 		glBegin(GL_POLYGON);
@@ -1823,7 +1819,7 @@ void myinit(void)
 	glEnable(GL_BLEND);
 }
 
-void Resize(int w, int h)
+void reShape(int w, int h)
 {
 	GLfloat aspectRatio;
 
@@ -1871,7 +1867,7 @@ int main(int argc, char* argv[])
 	glutMouseFunc(Mouse);
 	glutDisplayFunc(RenderScene);
 	glutTimerFunc(100, TimerFunction, frames);
-	glutReshapeFunc(Resize);
+	glutReshapeFunc(reShape);
 	glutMainLoop();
 	return 0;
 }
