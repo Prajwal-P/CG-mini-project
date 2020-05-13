@@ -268,34 +268,34 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 			if (m_state == GLUT_UP)
 				cout << "full = " << full << endl;
 				cout << m_x << " " << m_y << endl;
-			if (m_y > 92 && m_y < 116 && m_state == GLUT_UP)
+			if (m_x > 130 && m_x < 189 && m_y > 86 && m_y < 114 && m_state == GLUT_UP)
 			{
 				cout << "play" << endl;
 				page = 31;
 			}
-			if (m_y > 126 && m_y < 149 && m_state == GLUT_UP)
+			if (m_x > 130 && m_x < 235 && m_y > 120 && m_y < 150 && m_state == GLUT_UP)
 			{
 				cout << "Settings" << endl;
 				page = 31;
 				setting = 1;
 			}
-			if (m_y > 158 && m_y < 182 && m_state == GLUT_UP)
+			if (m_x > 130 && m_x < 279 && m_y > 154 && m_y < 182 && m_state == GLUT_UP)
 			{
 				cout << "Instructions" << endl;
 				page = 21;
 			}
-			if (m_y > 193 && m_y < 216 && m_state == GLUT_UP)
+			if (m_x > 130 && m_x < 209 && m_y > 187 && m_y < 217 && m_state == GLUT_UP)
 			{
 				cout << "Credit" << endl;
 				page = 22;
 			}
-			if (m_y > 226 && m_y < 256 && m_state == GLUT_UP)
+			if (m_x > 130 && m_x < 305 && m_y > 220 && m_y < 248 && m_state == GLUT_UP)
 			{
 				cout << "High" << endl;
 				page = 23;
 				//exit(0);
 			}
-			if (m_y > 260 && m_state == GLUT_UP)
+			if (m_x > 130 && m_x < 189 && m_y > 254 && m_y < 286 && m_state == GLUT_UP)
 			{
 				cout << "exit" << endl;
 				exit(0);
@@ -306,33 +306,33 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 			if (m_state == GLUT_UP)
 				cout << "full = " << full << endl;
 				cout << m_x << " " << m_y << endl;
-			if (m_y > 154 && m_y < 195 && m_state == GLUT_UP)
+			if (m_x > 314 && m_x < 453 && m_y > 206 && m_y < 273 && m_state == GLUT_UP)
 			{
 				cout << "play" << endl;
 				page = 31;
 			}
-			if (m_y > 213 && m_y < 251 && m_state == GLUT_UP)
+			if (m_x > 314 && m_x < 562 && m_y > 291 && m_y < 356 && m_state == GLUT_UP)
 			{
 				cout << "Settings" << endl;
 				page = 31;
 				setting = 1;
 			}
-			if (m_y > 269 && m_y < 310 && m_state == GLUT_UP)
+			if (m_x > 314 && m_x < 667 && m_y > 373 && m_y < 436 && m_state == GLUT_UP)
 			{
 				cout << "Instructions" << endl;
 				page = 21;
 			}
-			if (m_y > 329 && m_y < 366 && m_state == GLUT_UP)
+			if (m_x > 314 && m_x < 502 && m_y > 452 && m_y < 516 && m_state == GLUT_UP)
 			{
 				cout << "Credit" << endl;
 				page = 22;
 			}
-			if (m_y > 387 && m_y < 425 && m_state == GLUT_UP)
+			if (m_x > 314 && m_x < 732 && m_y > 531 && m_y < 601 && m_state == GLUT_UP)
 			{
 				cout << "High" << endl;
 				page = 23;
 			}
-			if (m_y > 430 && m_state == GLUT_UP)
+			if (m_x > 314 && m_x < 453 && m_y > 612 && m_y < 679 && m_state == GLUT_UP)
 			{
 				cout << "exit" << endl;
 				exit(0);
