@@ -254,11 +254,32 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 {
 	if (page == 1)
 	{
-		if (m_state == GLUT_UP)
+		if (m_state == GLUT_UP) {
+			//cout << "full = " << full << endl;
+			cout << "x = " << m_x << " y = " << m_y << endl;
+		}
+
+		if (full == 0)
 		{
-			cout << m_x << " " << m_y << endl;
-			if(m_x > 620 && m_y > 260)
-			page = 2;
+			if (m_state == GLUT_UP)
+			{
+				if (m_x > 620 && m_x < 800 && m_y > 260 && m_y < 420)
+				{
+					cout << "Next" << endl;
+					page = 2;
+				}
+			}
+		}
+		else if (full == 1)
+		{
+			if (m_state == GLUT_UP)
+			{
+				if (m_x > 1470 && m_x < 1920 && m_y > 650 && m_y < 1000)
+				{
+					cout << "Next" << endl;
+					page = 2;
+				}
+			}
 		}
 	}
 	else if (page == 2)
@@ -736,28 +757,28 @@ void draw_inst_text()
 	int i, lengthOfString;
 
 	strcpy(string[0], "Instructions:");
-	strcpy(string[1], "The main objectiove of this game is to go as far");
+	strcpy(string[1], "The main objective of this game is to go as far");
 	strcpy(string[2], "as possible in your plane, without hitting the");
 	strcpy(string[3], "missiles.");
-	strcpy(string[4], "Press right mouse button to increase altitude!");
+	strcpy(string[4], "Press left mouse button to increase altitude!");
 	strcpy(string[5], "Leaving it will automatically take you down.");
 	strcpy(string[6], "Keep a close eye on the fuel guage though :P");
 	strcpy(string[7], "Have FUN!!!");
 	glLineWidth(3);
 
 	glPushMatrix();
-	glTranslatef(-40, 50, 0);
-	glScalef(0.3, 0.3, 0.3);
+	glTranslatef(-45, 50, 0);
+	glScalef(0.15, 0.15, 0.15);
 	lengthOfString = (int)strlen(string[0]);
 	for (i = 0; i < lengthOfString; i++)
 	{
 		glColor3f(1, 1, 1);
-		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[0][i]);
+		glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, string[0][i]);
 	}
 	glPopMatrix();
 
 	glLineWidth(1);
-	int y_pos_21 = 20;
+	int y_pos_21 = 30;
 	for (int k_t = 1; k_t <= 7; k_t++)
 	{
 		glPushMatrix();
@@ -771,7 +792,6 @@ void draw_inst_text()
 		}
 		glPopMatrix();
 	}
-
 }
 
 //draw text in page 32 (choose plane)
@@ -1290,35 +1310,35 @@ void RenderScene()
 		glColor3f(0.0, 0.0, 0.0);
 		if (!full)
 		{
-			drawString(-129.0, 65.0, 0.0, "Bangalore Institute of Technology");
+			drawString(-142.0, 63.0, 0.0, "Bangalore Institute of Technology");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(-90.0, 55.0, 0.0, "Made By:");
+			drawString(-87.0, 53.0, 0.0, "Made By:");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(-110.0, 45.0, 0.0, "Revanth P N - 1BI17CS123");
+			drawString(-119.0, 43.0, 0.0, "Revanth P N - 1BI17CS123");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(-105.0, 35.0, 0.0, "Prajwal P - 1BI17CS111");
+			drawString(-111.0, 33.0, 0.0, "Prajwal P - 1BI17CS111");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
 			drawString(130.0, -50.0, 0.0, "Next!");
 		}
 		else
 		{
-			drawString(-105.0, 65.0, 0.0, "Bangalore Institute of Technology");
+			drawString(-100.0, 65.0, 0.0, "Bangalore Institute of Technology");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(-80.0, 55.0, 0.0, "Made By:");
+			drawString(-75.0, 55.0, 0.0, "Made By:");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(-95.0, 45.0, 0.0, "Revanth P N - 1BI17CS123");
+			drawString(-90.0, 45.0, 0.0, "Revanth P N - 1BI17CS123");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(-92.0, 35.0, 0.0, "Prajwal P - 1BI17CS111");
+			drawString(-87.0, 35.0, 0.0, "Prajwal P - 1BI17CS111");
 			setFont(GLUT_BITMAP_TIMES_ROMAN_24);
 			glColor3f(0.0, 0.0, 0.0);
-			drawString(125.0, -50.0, 0.0, "Click Here!");
+			drawString(128.0, -50.0, 0.0, "Click Here!");
 			setFont(GLUT_BITMAP_HELVETICA_18);
 			glColor3f(0.0, 0.0, 0.0);
 			drawString(135.0, -55.0, 0.0, "Next!");
@@ -1700,6 +1720,7 @@ void TimerFunction(int v)
 			x_step += 6.0 * SPEED;
 		else
 			page = 1;
+		cout << "x-step = " << x_step << endl;
 	}
 	if (page == 22)
 	{
