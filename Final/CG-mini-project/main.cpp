@@ -413,6 +413,7 @@ void Mouse(int button, int m_state, int m_x, int m_y)
 	}
 	else if (page == 32)
 	{
+		cout << m_x << " " << m_y << endl;
 		if (button == GLUT_LEFT_BUTTON && m_state == GLUT_UP)
 		{
 			if (full == 0)
@@ -800,7 +801,6 @@ void draw_chScene_text()
 	char string[15][120];
 	int i, lengthOfString;
 
-
 	strcpy(string[0], "Choose Scene");
 	strcpy(string[1], "Use arrow keys");
 	strcpy(string[2], "Next");
@@ -808,7 +808,7 @@ void draw_chScene_text()
 	glLineWidth(2);
 	glPushMatrix();
 	glTranslatef(-130, 55, 0);
-	glScalef(0.3, 0.3, 0.3);
+	glScalef((GLfloat)0.3, (GLfloat)0.3, (GLfloat)0.3);
 	lengthOfString = (int)strlen(string[0]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -820,7 +820,7 @@ void draw_chScene_text()
 	glLineWidth(3);
 	glPushMatrix();
 	glTranslatef(-75, 35, 0);
-	glScalef(0.15, 0.15, 0.15);
+	glScalef((GLfloat)0.15, (GLfloat)0.15, (GLfloat)0.15);
 	lengthOfString = (int)strlen(string[1]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -832,7 +832,7 @@ void draw_chScene_text()
 	glLineWidth(2);
 	glPushMatrix();
 	glTranslatef(-25, -75, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string[2]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -840,7 +840,6 @@ void draw_chScene_text()
 		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[2][i]);
 	}
 	glPopMatrix();
-
 }
 
 //draw text in page 31 (choose plane)
@@ -1542,9 +1541,7 @@ void RenderScene()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glEnable(GL_TEXTURE_2D);
-
 		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-
 		select_scene();
 		if (i_s == 0)
 		{
