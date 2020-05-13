@@ -21,12 +21,6 @@ void drawstring(float x, float y, float z, char* string)
 		glutBitmapCharacter(currentfont, *c);
 	}
 }
-//Sets jimmy's initial position and size.
-//rsize equals half of jimmy's height and width
-//GLfloat x = 0.0f;
-//GLfloat y = 0.0f;
-//GLfloat rsize = 8;
-
 
 void keyboard(unsigned char key, int x, int y)
 {
