@@ -43,6 +43,11 @@ void keyboard(unsigned char key, int x, int y)
 			glutPositionWindow(320, 150);
 			full = 0;
 		}
+	case 13:
+		cout << "next" << endl;
+		i_plane = 0;
+		//next page
+		break;
 	}
 }
 

@@ -213,6 +213,17 @@ void keyboard(unsigned char key, int x, int y)
 			i_plane = 0;
 			page = 32;
 		}
+		else if (page == 32)
+		{
+			cout << "next" << endl;
+			if (setting == 1)
+			{
+				setting = 0;
+				page = 2;
+			}
+			else
+				page = 3;
+		}
 	}
 }
 
