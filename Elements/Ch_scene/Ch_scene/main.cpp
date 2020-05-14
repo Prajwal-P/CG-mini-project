@@ -39,7 +39,7 @@ void keyboard(unsigned char key, int x, int y)
 		}
 		else
 		{
-			glutReshapeWindow(800, 600);
+			glutReshapeWindow(800, 450);
 			glutPositionWindow(320, 150);
 			full = 0;
 		}
