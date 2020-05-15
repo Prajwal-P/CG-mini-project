@@ -66,6 +66,13 @@ void keyboard(unsigned char key, int x, int y)
 			glutPositionWindow(320, 150);
 			full = 0;
 		}
+	case 'r':
+		fuel = 98;
+		theta = 0;
+		y_pos = 0;
+		state = DOWN;
+		crash = false;
+		break;
 	}
 }
 
@@ -147,8 +154,8 @@ void RenderScene()
 		glLineWidth(1);
 		glColor3f(1, 1, 1);
 		glBegin(GL_LINES);
-		glVertex2f(-200, 64);
-		glVertex2f(200, 64);
+		glVertex2f(-200, 65);
+		glVertex2f(200, 65);
 		glEnd();
 
 		draw_score();
@@ -181,7 +188,7 @@ void TimerFunction(int value)
 		cout << "y_pos = " << y_pos << endl;
 		if (state == UP && fuel > 0)
 		{
-			if (y_pos <= 90)
+			if (y_pos <= 55)
 				y_pos++;
 			if (theta < 15)
 			{
@@ -199,7 +206,7 @@ void TimerFunction(int value)
 		}
 
 		// Check for crash
-		if (y_pos < -90)
+		if (y_pos < -90 || y_pos > 55)
 		{
 			crash = true;
 			cout << "Crash!!!" << endl;
