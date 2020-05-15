@@ -6,118 +6,15 @@
 using namespace std;
 
 
-int frames = 2;
+int frames = 60;
 int direction = 0;
-int y_cre = 0;
+float y_cre = 0;
 int full = 0;
 
 GLfloat windowWidth;
 GLfloat windowHeight;
 
 GLuint tex_2d, tex_2d_plane;
-
-void draw_text()
-{
-	char string[5][50];
-	int i, lengthOfString;
-
-	strcpy(string[3], "Bangalore Institute of Technology");
-	strcpy(string[2], "Thank you!");
-	strcpy(string[1], "Revanth P N (1BI17CS123)");
-	strcpy(string[0], "Prajwal P (1BI17CS111)");
-	strcpy(string[4], "");
-
-
-	glLineWidth(1);
-
-	glPushMatrix();
-	glTranslatef(-105, 140 - y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
-	lengthOfString = (int)strlen(string[3]);
-	for (i = 0; i < lengthOfString; i++)
-	{
-		glColor3f(1, 1, 1);
-		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[3][i]);
-	}
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(-35, 110 - y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
-	lengthOfString = (int)strlen(string[2]);
-	for (i = 0; i < lengthOfString; i++)
-	{
-		glColor3f(1, 1, 1);
-		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[2][i]);
-	}
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(-160, -90 + y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
-	lengthOfString = (int)strlen(string[1]);
-	for (i = 0; i < lengthOfString; i++)
-	{
-		glColor3f(1, 1, 1);
-		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[1][i]);
-	}
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(25, -90 + y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
-	lengthOfString = (int)strlen(string[0]);
-	for (i = 0; i < lengthOfString; i++)
-	{
-		glColor3f(1, 1, 1);
-		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[0][i]);
-	}
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(-125, -110 + y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
-	lengthOfString = (int)strlen(string[4]);
-	for (i = 0; i < lengthOfString; i++)
-	{
-		glColor3f(1, 1, 1);
-		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[4][i]);
-	}
-	glPopMatrix();
-
-}
-
-void drawLogo()
-{
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glColor4f(1.0f, 1.0f, 1.0f, ((y_cre / 100.0)));
-	cout << y_cre << endl;
-	tex_2d_plane = SOIL_load_OGL_texture
-	(
-		"res/logo.png",
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MULTIPLY_ALPHA
-	);
-
-	glBindTexture(GL_TEXTURE_2D, tex_2d_plane);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glBegin(GL_POLYGON);
-	glTexCoord2f(0.0, 1.0);
-	glVertex2f(-30, -100);
-	glTexCoord2f(1.0, 1.0);
-	glVertex2f(30, -100);
-	glTexCoord2f(1.0, 0.0);
-	glVertex2f(30, -35);
-	glTexCoord2f(0.0, 0.0);
-	glVertex2f(-30, -35);
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-}
-
 
 void keyboard(unsigned char key, int x, int y)
 {
@@ -141,6 +38,119 @@ void keyboard(unsigned char key, int x, int y)
 			full = 0;
 		}
 	}
+}
+
+void draw_text()
+{
+	char string[6][50];
+	int i, lengthOfString;
+
+	strcpy(string[3], "Bangalore Institute of Technology");
+	strcpy(string[2], "Thank you!");
+	strcpy(string[1], "Revanth P N");
+	strcpy(string[0], "Prajwal P");
+	strcpy(string[5], "1BI17CS111");
+	strcpy(string[4], "1BI17CS123");
+
+
+	glLineWidth(1);
+
+	glPushMatrix();
+	glTranslatef(-105, 150 - y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
+	lengthOfString = (int)strlen(string[3]);
+	for (i = 0; i < lengthOfString; i++)
+	{
+		glColor3f(1, 1, 1);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[3][i]);
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-35, 120 - y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
+	lengthOfString = (int)strlen(string[2]);
+	for (i = 0; i < lengthOfString; i++)
+	{
+		glColor3f(1, 1, 1);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[2][i]);
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-140, -75 + y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
+	lengthOfString = (int)strlen(string[1]);
+	for (i = 0; i < lengthOfString; i++)
+	{
+		glColor3f(1, 1, 1);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[1][i]);
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(59, -75 + y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
+	lengthOfString = (int)strlen(string[0]);
+	for (i = 0; i < lengthOfString; i++)
+	{
+		glColor3f(1, 1, 1);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[0][i]);
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-135, -95 + y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
+	lengthOfString = (int)strlen(string[4]);
+	for (i = 0; i < lengthOfString; i++)
+	{
+		glColor3f(1, 1, 1);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[4][i]);
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(55, -95 + y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
+	lengthOfString = (int)strlen(string[5]);
+	for (i = 0; i < lengthOfString; i++)
+	{
+		glColor3f(1, 1, 1);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[5][i]);
+	}
+	glPopMatrix();
+}
+
+void drawLogo()
+{
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glColor4f((GLfloat)1.0f, (GLfloat)1.0f, (GLfloat)1.0f, (GLfloat)((y_cre / 100.0)));
+	cout << y_cre << endl;
+	tex_2d_plane = SOIL_load_OGL_texture
+	(
+		"res/logo.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MULTIPLY_ALPHA
+	);
+
+	glBindTexture(GL_TEXTURE_2D, tex_2d_plane);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(0.0, 1.0);
+	glVertex2f(-30, -95);
+	glTexCoord2f(1.0, 1.0);
+	glVertex2f(30, -95);
+	glTexCoord2f(1.0, 0.0);
+	glVertex2f(30, -30);
+	glTexCoord2f(0.0, 0.0);
+	glVertex2f(-30, -30);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
 }
 
 void RenderScene()
@@ -217,22 +227,13 @@ void reshape(int w, int h)
 	glLoadIdentity();
 }
 
-void mouse(int button, int state, int x, int y)
-{
-	if (state == GLUT_UP)
-	{
-
-		cout << "From Credit page: " << x << " " << y << endl;
-	}
-}
-
 void TimerFunction(int value)
 {
 	if (y_cre < 80)
-		y_cre+=2;
+		y_cre+=3;
 
 	glutPostRedisplay();
-	glutTimerFunc(frames, TimerFunction, 1);
+	glutTimerFunc(1, TimerFunction, value);
 }
 
 int main(int argc, char* argv[])
@@ -247,7 +248,6 @@ int main(int argc, char* argv[])
 		glutFullScreen();
 	}
 	glutKeyboardFunc(keyboard);
-	glutMouseFunc(mouse);
 	glutDisplayFunc(RenderScene);
 	glutTimerFunc(100, TimerFunction, frames);
 	glutReshapeFunc(reshape);
