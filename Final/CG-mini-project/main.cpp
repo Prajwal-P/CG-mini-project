@@ -578,21 +578,22 @@ void draw_fin_text()
 //draw text in credit screen (page=22)
 void draw_credit_text()
 {
-	char string[5][50];
+	char string[6][60];
 	int i, lengthOfString;
 
 	strcpy(string[3], "Bangalore Institute of Technology");
 	strcpy(string[2], "Thank you!");
-	strcpy(string[1], "Revanth P N (1BI17CS123)");
-	strcpy(string[0], "Prajwal P (1BI17CS111)");
-	strcpy(string[4], "");
+	strcpy(string[1], "Revanth P N");
+	strcpy(string[0], "Prajwal P");
+	strcpy(string[5], "1BI17CS111");
+	strcpy(string[4], "1BI17CS123");
 
 
 	glLineWidth(1);
 
 	glPushMatrix();
-	glTranslatef(-105, 140 - y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glTranslatef(-105, 150 - y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string[3]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -602,8 +603,8 @@ void draw_credit_text()
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-35, 110 - y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glTranslatef(-35, 120 - y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string[2]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -613,8 +614,8 @@ void draw_credit_text()
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-160, -90 + y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glTranslatef(-140, -75 + y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string[1]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -624,8 +625,8 @@ void draw_credit_text()
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(25, -90 + y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glTranslatef(59, -75 + y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string[0]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -635,8 +636,8 @@ void draw_credit_text()
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-125, -110 + y_cre, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glTranslatef(-135, -95 + y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string[4]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -645,6 +646,16 @@ void draw_credit_text()
 	}
 	glPopMatrix();
 
+	glPushMatrix();
+	glTranslatef(55, -95 + y_cre, 0);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
+	lengthOfString = (int)strlen(string[5]);
+	for (i = 0; i < lengthOfString; i++)
+	{
+		glColor3f(1, 1, 1);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, string[5][i]);
+	}
+	glPopMatrix();
 }
 
 
@@ -1202,7 +1213,7 @@ void drawLogo()
 {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	glColor4f(1.0f, 1.0f, 1.0f, ((y_cre / 100.0)));
+	glColor4f((GLfloat)1.0f, (GLfloat)1.0f, (GLfloat)1.0f, (GLfloat)((y_cre / 100.0)));
 	cout << y_cre << endl;
 	tex_2d_plane = SOIL_load_OGL_texture
 	(
@@ -1217,13 +1228,13 @@ void drawLogo()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
-	glVertex2f(-30, -100);
+	glVertex2f(-30, -95);
 	glTexCoord2f(1.0, 1.0);
-	glVertex2f(30, -100);
+	glVertex2f(30, -95);
 	glTexCoord2f(1.0, 0.0);
-	glVertex2f(30, -35);
+	glVertex2f(30, -30);
 	glTexCoord2f(0.0, 0.0);
-	glVertex2f(-30, -35);
+	glVertex2f(-30, -30);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
