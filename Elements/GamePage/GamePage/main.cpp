@@ -15,20 +15,6 @@
 using namespace std;
 int frames = 60;
 
-//  The number of frames
-int frameCount = 0;
-//  Number of frames per second
-float fps = 0;
-//  currentTime - previousTime is the time elapsed
-//  between every call of the Idle function
-int currentTime = 0, previousTime = 0;
-
-//for choose scene
-char scene[50];
-int ch_scene = 1;
-
-//high scores
-int max_dist, max_miss;
 
 //flag to check if you were hit by a missile
 int hit_missile = 0;
@@ -36,14 +22,6 @@ int hit_missile = 0;
 //flad to determint the plane chosen by the user
 int plane_choice = 2;
 
-//flag for setting
-int setting = 0;
-
-void* currentfont;
-
-float x_step = -171.0;    //for loading bar movement (in pg=0)
-
-float y_cre = 0;            //for credits text moveemnt
 float y_pos = 0;          //y axis position of plane
 float theta = 0;          //angle of the plane
 bool state;             //state of plane (either going up or down)
@@ -58,15 +36,12 @@ GLfloat missile_x = 250, missile_y[MAX_MISSILES] = { 0 };//position of missiles
 int no_of_missiles = 3;   //determines number of missiles in the game
 
 int full = 0;
-int i_bck, i_mis1, i_mis2, i_mis3, i_plane, i_inst21;
-int i_cre22, i_sel31, i_sel32, i_fin4, i_2, i_23, i_0, i_1;
-int i_s;
+int i_mis1, i_mis2, i_mis3, i_plane;
 
 GLfloat windowWidth;
 GLfloat windowHeight;
 
-GLuint tex_2d, tex_2d_mis[4], tex_2d_plane;
-GLuint tex_2d_0, tex_2d_1, tex_2d_2, tex_2d_21, tex_2d_22, tex_2d_31, tex_2d_4, tex_2d_23;
+GLuint tex_2d_mis[4], tex_2d_plane;
 
 //determines the current screen
 int page = 3;
@@ -87,34 +62,19 @@ public:
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-		if (plane_choice == 1)
+
+		if (i_plane == 0)
 		{
-			if (i_plane == 0)
-			{
-				tex_2d_plane = SOIL_load_OGL_texture
-				(
-					"res/plane2.png",
-					SOIL_LOAD_AUTO,
-					SOIL_CREATE_NEW_ID,
-					SOIL_FLAG_MULTIPLY_ALPHA
-				);
-				i_plane = 1;
-			}
+			tex_2d_plane = SOIL_load_OGL_texture
+			(
+				"res/plane2.png",
+				SOIL_LOAD_AUTO,
+				SOIL_CREATE_NEW_ID,
+				SOIL_FLAG_MULTIPLY_ALPHA
+			);
+			i_plane = 1;
 		}
-		if (plane_choice == 2)
-		{
-			if (i_plane == 0)
-			{
-				tex_2d_plane = SOIL_load_OGL_texture
-				(
-					"res/plane3.png",
-					SOIL_LOAD_AUTO,
-					SOIL_CREATE_NEW_ID,
-					SOIL_FLAG_MULTIPLY_ALPHA
-				);
-				i_plane = 1;
-			}
-		}
+
 		glBindTexture(GL_TEXTURE_2D, tex_2d_plane);
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -158,38 +118,18 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	}
 }
-
-//For glutBitmapCharacter (used only in page 1)
-void setFont(void* font)
-{
-	currentfont = font;
-}
-
-void drawString(float x, float y, float z, const char *string)
-{
-	int i;
-	glRasterPos3f(x, y, z);
-	for (i = 0; string[i] != '\0'; i++)
-	{
-		glutBitmapCharacter(currentfont, string[i]);
-	}
-}
-
 //Determines the action on mouse click event
 void Mouse(int button, int m_state, int m_x, int m_y)
 {
-	if (page == 3)
+	if (button == GLUT_LEFT_BUTTON && m_state == GLUT_DOWN)
 	{
-		if (button == GLUT_LEFT_BUTTON && m_state == GLUT_DOWN)
-		{
-			state = UP;
-			cout << "Going Up!" << endl;
-		}
-		else if (button == GLUT_LEFT_BUTTON && m_state == GLUT_UP)
-		{
-			state = DOWN;
-			cout << "Going Down" << endl;
-		}
+		state = UP;
+		cout << "Going Up!" << endl;
+	}
+	else if (button == GLUT_LEFT_BUTTON && m_state == GLUT_UP)
+	{
+		state = DOWN;
+		cout << "Going Down" << endl;
 	}
 }
 
@@ -442,33 +382,6 @@ void RenderScene()
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glEnable(GL_TEXTURE_2D);
-		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-		if (i_bck == 0)
-		{
-			tex_2d = SOIL_load_OGL_texture
-			(
-				scene,
-				SOIL_LOAD_RGBA,
-				SOIL_CREATE_NEW_ID,
-				SOIL_FLAG_NTSC_SAFE_RGB
-			);
-			i_bck = 1;
-		}
-		glBindTexture(GL_TEXTURE_2D, tex_2d);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glBegin(GL_POLYGON);
-		glTexCoord2f(0.0, 1.0);
-		glVertex2f(-190.0f + x, -100.0f);
-		glTexCoord2f(1.0, 1.0);
-		glVertex2f(890.0f + x, -100.0f);
-		glTexCoord2f(1.0, 0.0);
-		glVertex2f(890.0f + x, 100.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(-190.0f + x, 100.0f);
-		glEnd();
-		glDisable(GL_TEXTURE_2D);
-
 		//fuel indicator outline
 		glColor3f(0, 0, 0);
 		glLineWidth(3);
@@ -511,88 +424,85 @@ void RenderScene()
 
 void TimerFunction(int v)
 {
-	if (page == 3)
+	if (fuel == 98 || x < -700)
+		x = 0;
+	x -= 0.3 * SPEED;
+	cout << x << endl;
+	if (missile_x < -210)
+		missile_x = 250;
+	missile_x -= 1 * SPEED;
+	if (state == UP)
 	{
-		if (fuel == 98 || x < -700)
-			x = 0;
-		x -= 0.3 * SPEED;
-		cout << x << endl;
-		if (missile_x < -210)
-			missile_x = 250;
-		missile_x -= 1 * SPEED;
-		if (state == UP)
-		{
-			if (fuel > 0)
-				fuel -= .1 * SPEED;
-		}
+		if (fuel > 0)
+			fuel -= .1 * SPEED;
+	}
 
-		dist += 0.1 * SPEED;
+	dist += 0.1 * SPEED;
 
-		//update number of missiles douged
+	//update number of missiles douged
+	{
+		if (missile_x < -90)
 		{
-			if (missile_x < -90)
+			if (update_mis == 0)
 			{
-				if (update_mis == 0)
-				{
-					missiles += no_of_missiles;
-					update_mis = 1;
-				}
+				missiles += no_of_missiles;
+				update_mis = 1;
 			}
-			else
-				update_mis = 0;
-		}
-
-		//plane position
-		if (state == UP)
-		{
-			if (fuel > 0)
-			{
-				if (y_pos <= 90)
-					SPEED* y_pos++;
-				if (theta < 0)
-					theta += .3 * SPEED;
-				else
-					theta += .1 * SPEED;
-			}
-			else
-				y_pos--* SPEED;
 		}
 		else
+			update_mis = 0;
+	}
+
+	//plane position
+	if (state == UP)
+	{
+		if (fuel > 0)
 		{
-			if (y_pos >= -100)
-				SPEED* y_pos--;
+			if (y_pos <= 90)
+				SPEED* y_pos++;
+			if (theta < 0)
+				theta += .3 * SPEED;
 			else
+				theta += .1 * SPEED;
+		}
+		else
+			y_pos--* SPEED;
+	}
+	else
+	{
+		if (y_pos >= -100)
+			SPEED* y_pos--;
+		else
+		{
+			y_pos = 0;
+			page = 4;
+		}
+		if (theta > 0)
+			theta -= .3 * SPEED;
+		else
+			theta -= .1 * SPEED;
+
+	}
+
+	//check for collision
+	if (missile_x < -110)
+	{
+		cout << "Possibility of crash" << endl;
+		for (int m = 1; m <= no_of_missiles; m++)
+		{
+			if (missile_y[m] > y_pos - 10 && missile_y[m] < y_pos + 10)
 			{
+				cout << "Crash" << endl;
+				hit_missile = 1;
+				for (int m1 = 1; m1 <= no_of_missiles; m1++)
+					missile_x = 200;
 				y_pos = 0;
+				x = 0;
 				page = 4;
+				break;
 			}
-			if (theta > 0)
-				theta -= .3 * SPEED;
-			else
-				theta -= .1 * SPEED;
-
 		}
 
-		//check for collision
-		if (missile_x < -110)
-		{
-			cout << "Possibility of crash" << endl;
-			for (int m = 1; m <= no_of_missiles; m++)
-			{
-				if (missile_y[m] > y_pos - 10 && missile_y[m] < y_pos + 10)
-				{
-					cout << "Crash" << endl;
-					hit_missile = 1;
-					for (int m1 = 1; m1 <= no_of_missiles; m1++)
-						missile_x = 200;
-					y_pos = 0;
-					x = 0;
-					page = 4;
-					break;
-				}
-			}
-
-		}
 	}
 
 	glutPostRedisplay();
