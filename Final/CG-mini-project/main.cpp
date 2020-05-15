@@ -1787,34 +1787,28 @@ void TimerFunction(int v)
 		}
 
 		//plane position
-		if (state == UP)
+		if (state == UP && fuel > 0)
 		{
-			if (fuel > 0)
+			if (y_pos <= 55)
+				y_pos++;
+			if (theta < 10)
 			{
-				if (y_pos <= 90)
-					SPEED* y_pos++;
-				if (theta < 0)
-					theta += .3 * SPEED;
-				else
-					theta += .1 * SPEED;
+				theta += 0.5;
 			}
-			else
-				y_pos--* SPEED;
 		}
 		else
 		{
-			if (y_pos >= -100)
-				SPEED* y_pos--;
-			else
+			if (y_pos >= -90)
+				y_pos--;
+			if (theta > -10)
 			{
-				y_pos = 0;
-				page = 4;
+				theta -= 0.5;
 			}
-			if (theta > 0)
-				theta -= .3 * SPEED;
-			else
-				theta -= .1 * SPEED;
+		}
 
+		if (y_pos < -90)
+		{
+			page = 4;
 		}
 
 		//check for collision
