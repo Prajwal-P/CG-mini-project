@@ -10,6 +10,11 @@ using namespace std;
 float y_pos = 0;
 float theta = 0;
 bool state;
+
+GLfloat fuel = 98;        //fuel left in plane
+
+bool crash = false;
+
 class plane
 {
 public:
@@ -67,51 +72,138 @@ void keyboard(unsigned char key, int x, int y)
 
 void mouse(int button, int m_state, int x, int y)
 {
-	if (button == GLUT_LEFT_BUTTON && m_state == GLUT_DOWN)
+	if (!crash)
 	{
-		state = UP;
-		cout << "Going Up!" << endl;
+		if (button == GLUT_LEFT_BUTTON && m_state == GLUT_DOWN)
+		{
+			state = UP;
+			cout << "Going Up!" << endl;
+		}
+		else if (button == GLUT_LEFT_BUTTON && m_state == GLUT_UP)
+		{
+			state = DOWN;
+			cout << "Going Down" << endl;
+		}
 	}
-	else if (button == GLUT_LEFT_BUTTON && m_state == GLUT_UP)
+}
+
+void draw_score()
+{
+	int length, i;
+
+	char fuel_text[15];
+	strcpy(fuel_text, "Fuel:  %");
+	glPushMatrix();
+	glTranslatef(-149, 82, 0);
+	glScalef((GLfloat)0.08, (GLfloat)0.08, (GLfloat)0.08);
+	length = (int)strlen(fuel_text);
+	for (i = 0; i < length; i++)
 	{
-		state = DOWN;
-		cout << "Going Down" << endl;
+		glColor3f(1, 0, 0);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, fuel_text[i]);
 	}
+	glPopMatrix();
+
+	char fuel_text_val[15];
+	sprintf(fuel_text_val, "%d", (int)fuel);
+	glPushMatrix();
+	glTranslatef(-125, 82, 0);
+	glScalef((GLfloat)0.08, (GLfloat)0.08, (GLfloat)0.08);
+	length = (int)strlen(fuel_text_val);
+	for (i = 0; i < length; i++)
+	{
+		glColor3f(1, 0, 0);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, fuel_text_val[i]);
+	}
+	glPopMatrix();
 }
 
 void RenderScene()
 {
+	if (!crash)
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
 
-	glClear(GL_COLOR_BUFFER_BIT);
+		//fuel indicator outline
+		glColor3f(0, 0, 0);
+		glLineWidth(2);
+		glBegin(GL_LINE_LOOP);
+		glVertex2f(-50 - 100, 80);
+		glVertex2f(50 - 100, 80);
+		glVertex2f(50 - 100, 70);
+		glVertex2f(-50 - 100, 70);
+		glEnd();
 
-	glPushMatrix();
-	glTranslatef(-150, y_pos, 0);
-	glRotatef(theta, 0, 0, 1);
-	plane1.draw_plane();
-	glPopMatrix();
+		//fuel indicator
+		glColor3f(1, 0, 0);
+		glBegin(GL_POLYGON);
+		glVertex2f(-49 - 100, 79);
+		glVertex2f(-49 + fuel - 100, 79);
+		glVertex2f(-49 + fuel - 100, 71);
+		glVertex2f(-49 - 100, 71);
+		glEnd();
 
-	glutSwapBuffers();
+		//seprator--to seprate score and game screen
+		glLineWidth(1);
+		glColor3f(1, 1, 1);
+		glBegin(GL_LINES);
+		glVertex2f(-200, 64);
+		glVertex2f(200, 64);
+		glEnd();
 
+		draw_score();
+
+		glPushMatrix();
+		glTranslatef(-150, y_pos, 0);
+		glRotatef(theta, 0, 0, 1);
+		plane1.draw_plane();
+		glPopMatrix();
+
+		glutSwapBuffers();
+	}
+	else
+	{
+		;
+		// Next page
+	}
 }
 
 void TimerFunction(int value)
 {
-	if (state == UP)
+	if (!crash)
 	{
-		if (y_pos <= 90)
-			y_pos++;
-		if (theta < 15)
+		if (state == UP)
 		{
-			theta += 0.5;
+			if (fuel > 0)
+				fuel -= (GLfloat).1;
 		}
-	}
-	else
-	{
-		if (y_pos >= -90)
-			y_pos--;
-		if (theta > -15)
+
+		cout << "y_pos = " << y_pos << endl;
+		if (state == UP && fuel > 0)
 		{
-			theta -= 0.5;
+			if (y_pos <= 90)
+				y_pos++;
+			if (theta < 15)
+			{
+				theta += 0.5;
+			}
+		}
+		else
+		{
+			if (y_pos >= -90)
+				y_pos--;
+			if (theta > -15)
+			{
+				theta -= 0.5;
+			}
+		}
+
+		// Check for crash
+		if (y_pos < -90)
+		{
+			crash = true;
+			cout << "Crash!!!" << endl;
+			cout << "Next Page" << endl;
 		}
 	}
 
