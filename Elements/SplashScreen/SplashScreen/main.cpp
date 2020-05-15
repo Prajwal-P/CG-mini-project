@@ -5,7 +5,7 @@
 using namespace std;
 
 void* currentfont;
-int full = 1;   //defines state of screen (fullscreen or not)
+int full = 0;   //defines state of screen (fullscreen or not)
 int frames = 50;
 
 GLfloat windowWidth;
@@ -33,6 +33,39 @@ void keyboard(unsigned char key, int x, int y)
 			glutReshapeWindow(800, 450);
 			glutPositionWindow(320, 150);
 			full = 0;
+		}
+		break;
+	case 13:
+		//go to next page!
+		cout << "Next" << endl;
+		break;
+	}
+}
+
+void mouse(int button, int state, int x, int y)
+{
+	if (full == 0)
+	{
+		if (state == GLUT_UP)
+		{
+			cout << x << " " << y << endl;
+			if (x > 620 && x < 800 && y > 260 && y < 420)
+			{
+				//go to next page!
+				cout << "Next" << endl;
+			}
+		}
+	}
+	else if (full == 1)
+	{
+		if (state == GLUT_UP)
+		{
+			cout << x << " " << y << endl;
+			if (x > 1180 && x < 1530 && y > 500 && y < 800)
+			{
+				//go to next page!
+				cout << "Next" << endl;
+			}
 		}
 	}
 }
@@ -168,35 +201,6 @@ void reshape(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
-
-void mouse(int button, int state, int x, int y)
-{
-	if (full == 0)
-	{
-		if (state == GLUT_UP)
-		{
-			cout << x << " " << y << endl;
-			if (x > 620 && x < 800 && y > 260 && y < 420)
-			{
-				//go to next page!
-				cout << "Next" << endl;
-			}
-		}
-	}
-	else if (full == 1)
-	{
-		if (state == GLUT_UP)
-		{
-			cout << x << " " << y << endl;
-			if (x > 1180 && x < 1530 && y > 500 && y < 800)
-			{
-				//go to next page!
-				cout << "Next" << endl;
-			}
-		}
-	}
-}
-
 
 //Actually opens the window, initializes all the functions I made, and throws it all into a loop. Hooray!
 int main(int argc, char* argv[])

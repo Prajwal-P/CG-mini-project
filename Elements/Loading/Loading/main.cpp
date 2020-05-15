@@ -87,7 +87,6 @@ void RenderScene()
 
 	glutSwapBuffers();
 	glFlush();
-
 }
 
 void TimerFunction(int value)
