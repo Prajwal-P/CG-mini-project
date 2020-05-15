@@ -25,7 +25,7 @@ void keyboard(unsigned char key, int x, int y)
 		//27 is the ASCII value of the ESC key
 	case 27:
 		//go back to previous page
-
+		exit(0);
 		break;
 
 	case 'f':       //full screen
