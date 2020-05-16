@@ -53,7 +53,7 @@ float x_step = -171.0;    //for loading bar movement (in pg=0)
 float y_cre = 0;            //for credits text moveemnt
 float y_pos = 0;          //y axis position of plane
 float theta = 0;          //angle of the plane
-bool state;             //state of plane (either going up or down)
+bool state = DOWN;             //state of plane (either going up or down)
 
 int update_mis;
 
@@ -175,6 +175,7 @@ void keyboard(unsigned char key, int x, int y)
 			setting = 0;
 			hit_missile = 0;
 			y_pos = 0;
+			state = DOWN;
 			missile_x = 250;
 			fuel = 98;
 			y_cre = 0;
