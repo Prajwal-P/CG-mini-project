@@ -61,7 +61,7 @@ GLfloat x = 0.0f;       //background screen position
 
 GLfloat fuel = 98;        //fuel left in plane
 GLfloat dist, missiles; //dustance travelled and missiled douged
-GLfloat missile_x = 250, missile_y[MAX_MISSILES] = { 0 };//position of missiles
+GLfloat missile_x = 250, missile_y[MAX_MISSILES+1] = { 0 };//position of missiles
 int no_of_missiles = 3;   //determines number of missiles in the game
 
 int full = 1;
@@ -516,7 +516,7 @@ void draw_fin_text()
 	glLineWidth(4);
 	glPushMatrix();
 	glTranslatef(-105, 55, 0);
-	glScalef(0.3, 0.3, 0.3);
+	glScalef((GLfloat)0.3, (GLfloat)0.3, (GLfloat)0.3);
 	lengthOfString = (int)strlen(string[0]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -528,7 +528,7 @@ void draw_fin_text()
 	glLineWidth(3);
 	glPushMatrix();
 	glTranslatef(-155, 35, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string[1]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -539,7 +539,7 @@ void draw_fin_text()
 
 	glPushMatrix();
 	glTranslatef(-155, 20, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string[2]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -552,7 +552,7 @@ void draw_fin_text()
 	{
 		glPushMatrix();
 		glTranslatef(-155, 5, 0);
-		glScalef(0.1, 0.1, 0.1);
+		glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 		lengthOfString = (int)strlen(string[3]);
 		for (i = 0; i < lengthOfString; i++)
 		{
@@ -565,7 +565,7 @@ void draw_fin_text()
 	{
 		glPushMatrix();
 		glTranslatef(-155, 5, 0);
-		glScalef(0.1, 0.1, 0.1);
+		glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 		lengthOfString = (int)strlen(string[4]);
 		for (i = 0; i < lengthOfString; i++)
 		{
@@ -659,7 +659,6 @@ void draw_credit_text()
 	glPopMatrix();
 }
 
-
 void draw_high_text()
 {
 	char string_high[10][20];
@@ -672,7 +671,7 @@ void draw_high_text()
 	glLineWidth(3);
 	glPushMatrix();
 	glTranslatef(0, 30, 0);
-	glScalef(0.2, 0.2, 0.2);
+	glScalef((GLfloat)0.2, (GLfloat)0.2, (GLfloat)0.2);
 	lengthOfString = (int)strlen(string_high[0]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -684,7 +683,7 @@ void draw_high_text()
 	glLineWidth(2);
 	glPushMatrix();
 	glTranslatef(70, 0, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string_high[1]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -695,7 +694,7 @@ void draw_high_text()
 
 	glPushMatrix();
 	glTranslatef(70, -15, 0);
-	glScalef(0.1, 0.1, 0.1);
+	glScalef((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1);
 	lengthOfString = (int)strlen(string_high[2]);
 	for (i = 0; i < lengthOfString; i++)
 	{
@@ -708,7 +707,6 @@ void draw_high_text()
 //draw text in page 2 (menu screen)
 void draw_menu_text()
 {
-
 	char string_menu[10][20];
 	int lengthOfString, i;
 
@@ -1051,7 +1049,7 @@ void select_scene()
 	}
 }
 
-void rocket1(int x_cor, int y_cor)
+void rocket1(GLfloat x_cor, GLfloat y_cor)
 {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
@@ -1084,7 +1082,7 @@ void rocket1(int x_cor, int y_cor)
 	glDisable(GL_BLEND);
 }
 
-void rocket2(int x_cor, int y_cor)
+void rocket2(GLfloat x_cor, GLfloat y_cor)
 {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
@@ -1117,7 +1115,7 @@ void rocket2(int x_cor, int y_cor)
 	glDisable(GL_BLEND);
 }
 
-void rocket3(int x_cor, int y_cor)
+void rocket3(GLfloat x_cor, GLfloat y_cor)
 {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
@@ -1159,7 +1157,7 @@ void draw_rockets()
 	if (missile_x >= 195 && missile_x <= 200)
 	{
 		for (int k = 1; k <= no_of_missiles; k++)
-			missile_y[k] = -101 + rand() % 165;
+			missile_y[k] = (GLfloat)(-95 + rand() % 140);
 	}
 	switch (no_of_missiles)
 	{
@@ -1720,6 +1718,7 @@ void RenderScene()
 	}
 
 }
+
 void calculateFPS()
 {
 	//  Increase frame count
@@ -1740,6 +1739,7 @@ void calculateFPS()
 		frameCount = 0;
 	}
 }
+
 void TimerFunction(int v)
 {
 	calculateFPS();
@@ -1762,20 +1762,22 @@ void TimerFunction(int v)
 			x = 0;
 		x -= 0.3 * SPEED;
 		cout << x << endl;
+
 		if (missile_x < -210)
 			missile_x = 250;
-		missile_x -= 1 * SPEED;
+		missile_x -= (GLfloat)(1 * SPEED);
+
 		if (state == UP)
 		{
 			if (fuel > 0)
-				fuel -= .1 * SPEED;
+				fuel -= (GLfloat)(.1 * SPEED);
 		}
 
 		dist += 0.1 * SPEED;
 
 		//update number of missiles douged
 		{
-			if (missile_x < -90)
+			if (missile_x < -200)
 			{
 				if (update_mis == 0)
 				{
