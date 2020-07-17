@@ -53,7 +53,7 @@ float x_step = -171.0;    //for loading bar movement (in pg=0)
 float y_cre = 0;            //for credits text moveemnt
 float y_pos = 0;          //y axis position of plane
 float theta = 0;          //angle of the plane
-bool state;             //state of plane (either going up or down)
+bool state = DOWN;             //state of plane (either going up or down)
 
 int update_mis;
 
@@ -175,6 +175,7 @@ void keyboard(unsigned char key, int x, int y)
 			setting = 0;
 			hit_missile = 0;
 			y_pos = 0;
+			state = DOWN;
 			missile_x = 250;
 			fuel = 98;
 			y_cre = 0;
@@ -1787,34 +1788,28 @@ void TimerFunction(int v)
 		}
 
 		//plane position
-		if (state == UP)
+		if (state == UP && fuel > 0)
 		{
-			if (fuel > 0)
+			if (y_pos <= 55)
+				y_pos++;
+			if (theta < 10)
 			{
-				if (y_pos <= 90)
-					SPEED* y_pos++;
-				if (theta < 0)
-					theta += .3 * SPEED;
-				else
-					theta += .1 * SPEED;
+				theta += 0.5;
 			}
-			else
-				y_pos--* SPEED;
 		}
 		else
 		{
-			if (y_pos >= -100)
-				SPEED* y_pos--;
-			else
+			if (y_pos >= -90)
+				y_pos--;
+			if (theta > -10)
 			{
-				y_pos = 0;
-				page = 4;
+				theta -= 0.5;
 			}
-			if (theta > 0)
-				theta -= .3 * SPEED;
-			else
-				theta -= .1 * SPEED;
+		}
 
+		if (y_pos < -90)
+		{
+			page = 4;
 		}
 
 		//check for collision

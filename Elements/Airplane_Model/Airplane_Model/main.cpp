@@ -12,8 +12,19 @@ float theta = 0;
 bool state;
 
 GLfloat fuel = 98;        //fuel left in plane
+GLfloat dist = 0;
 
 bool crash = false;
+
+int frames = 5, full = 0;
+//Sets the direction and velocity of airplane at the program initialization
+/*The value of these variables defines the amount of pixels along the standard Cartesian coordinate system
+airplane moves. For example, setting xstep to -2.0f would mean that airplane would move two pixels
+in a certain amount of time defined by the frames variable. The frames variable dictates the amount of milliseconds inbetween each movement of the square.
+That means that if frames = 2, I get 50 fps, and therefore 50 movements of airplane in a second.*/
+
+GLfloat windowWidth;
+GLfloat windowHeight;
 
 class plane
 {
@@ -36,15 +47,6 @@ public:
 	}
 } plane1;
 
-int frames = 5, full = 0;
-//Sets the direction and velocity of airplane at the program initialization
-/*The value of these variables defines the amount of pixels along the standard Cartesian coordinate system
-airplane moves. For example, setting xstep to -2.0f would mean that airplane would move two pixels
-in a certain amount of time defined by the frames variable. The frames variable dictates the amount of milliseconds inbetween each movement of the square.
-That means that if frames = 2, I get 50 fps, and therefore 50 movements of airplane in a second.*/
-
-GLfloat windowWidth;
-GLfloat windowHeight;
 
 void keyboard(unsigned char key, int x, int y)
 {
@@ -66,6 +68,14 @@ void keyboard(unsigned char key, int x, int y)
 			glutPositionWindow(320, 150);
 			full = 0;
 		}
+	case 'r':
+		fuel = 98;
+		theta = 0;
+		y_pos = 0;
+		state = DOWN;
+		dist = 0;
+		crash = false;
+		break;
 	}
 }
 
@@ -90,6 +100,33 @@ void mouse(int button, int m_state, int x, int y)
 void draw_score()
 {
 	int length, i;
+	char score_text[15];
+
+	strcpy(score_text, "Distance: ");
+	glLineWidth(1);
+	glPushMatrix();
+	glTranslatef(85, 82, 0);
+	glScalef((GLfloat)0.08, (GLfloat)0.08, (GLfloat)0.08);
+	length = (int)strlen(score_text);
+	for (i = 0; i < length; i++)
+	{
+		glColor3f(1, 1, 0);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, score_text[i]);
+	}
+	glPopMatrix();
+
+	char dist_text_val[15];
+	sprintf(dist_text_val, "%d", (int)dist);
+	glPushMatrix();
+	glTranslatef(130, 82, 0);
+	glScalef((GLfloat)0.08, (GLfloat)0.08, (GLfloat)0.08);
+	length = (int)strlen(dist_text_val);
+	for (i = 0; i < length; i++)
+	{
+		glColor3f(1, 1, 0);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, dist_text_val[i]);
+	}
+	glPopMatrix();
 
 	char fuel_text[15];
 	strcpy(fuel_text, "Fuel:  %");
@@ -147,8 +184,8 @@ void RenderScene()
 		glLineWidth(1);
 		glColor3f(1, 1, 1);
 		glBegin(GL_LINES);
-		glVertex2f(-200, 64);
-		glVertex2f(200, 64);
+		glVertex2f(-200, 65);
+		glVertex2f(200, 65);
 		glEnd();
 
 		draw_score();
@@ -178,10 +215,12 @@ void TimerFunction(int value)
 				fuel -= (GLfloat).1;
 		}
 
+		dist += (GLfloat)0.1;
+
 		cout << "y_pos = " << y_pos << endl;
 		if (state == UP && fuel > 0)
 		{
-			if (y_pos <= 90)
+			if (y_pos <= 55)
 				y_pos++;
 			if (theta < 15)
 			{
@@ -199,7 +238,7 @@ void TimerFunction(int value)
 		}
 
 		// Check for crash
-		if (y_pos < -90)
+		if (y_pos < -90 || y_pos > 55)
 		{
 			crash = true;
 			cout << "Crash!!!" << endl;
