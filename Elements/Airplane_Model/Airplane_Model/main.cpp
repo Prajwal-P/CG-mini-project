@@ -260,7 +260,7 @@ void ChangeSize(int w, int h)
 {
 	GLfloat aspectRatio;
 
-	//Prevents a divid by zero. We wouldn't want that, now, would we.
+	//Prevents a divide by zero. We wouldn't want that, now, would we.
 	if (h == 0)
 		h = 1;
 
